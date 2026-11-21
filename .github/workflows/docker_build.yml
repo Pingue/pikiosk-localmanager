@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v3.0.0
+        uses: gittools/actions/gitversion/setup@v5.0.0
         with:
           versionSpec: '6.0.4'
       - name: gitversion
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v3.0.0
+        uses: gittools/actions/gitversion/execute@v5.0.0
         with:
           useConfigFile: "true"
           configFilePath: "GitVersion.yml"
@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
       - name: Create tag
-        uses: actions/github-script@v3
+        uses: actions/github-script@v9
         with:
           script: |
             github.git.createRef({
